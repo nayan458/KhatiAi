@@ -1,15 +1,11 @@
-import React, { useRef, useState } from "react";
+import React , { useState, useRef } from 'react'
+import NodeContext from './NodeContext'
 import { UserAgent } from '@apirtc/apirtc';
-// import NodeState from "../../contexts/NodeState";
-import NodeContext from "../../contexts/NodeContext";
-import { Link, useNavigate } from "react-router-dom";
-import MainCmp from "../MainCmp";
+import { useNavigate } from 'react-router-dom';
 
-function Learnings({image, name}){
-    // const {startConversation} = useContext(NodeContext)
-    const conversationRef = useRef(null);
+export default function NodeState(props) {
+  const conversationRef = useRef(null);
   const [conversationName, setConversationName] = useState("")
-
 
   //streamListchanged: subscribe to new remote streams published in the conversation and get future events triggered by this stream
   var onStreamListChangedHandler = function (streamInfo) {
@@ -109,53 +105,16 @@ function Learnings({image, name}){
     });
   }
 
-    const [hide, sethide] = useState(true)
 
-    const func=()=>{
-        sethide(false)
-        startConversation()
-    }   
-    return(
-        <>
-        <div>
-            <div className="farmer">
-               <img className="farmer-img" src={image} />
-               <div className="farmer-footer">
-                    <h1 className="farmer-name">{name}</h1>
-                    
-                        <button className="famers-connect-btn" onClick={()=>{
-                         func()
-                            
-                        }}> connect </button>
-                    
-               </div>
-            </div>
-        </div>
+  // Active class
 
-                        <div className={hide ? "hidden" : "absolute top-0 right-0"}>
-                                <MainCmp comp={
-                                <>
-                                    <div className="w-full h-full bg-white">
-                                        <p>conversationName</p>
-                                        <h2 className='h1'>Remote videos</h2>
-                                        <div id="remote-container">
-                                        {/* <!-- This is where the remote video streams will be added --> */}
-                                        </div>
-                                        <div id="local-container">
-                                        <h2 className='h1'>Local video</h2>
-                                        <p><span id="local-stream-id"></span></p>
-                                        {/* <!-- This is where we are going to display our local video stream --> */}
-                                        <video id="local-video-stream" autoPlay muted className='w-36 h-36'></video>
-                                        </div>
-                                    </div>
-
-                                </>
-                            } />
-                        </div>
-        </>
-
-        
-    )
+    return (
+        <NodeContext.Provider value={
+            {
+                startConversation, conversationName, setConversationName
+            }
+          }>
+            {props.children}
+        </NodeContext.Provider>
+  )
 }
-
-export default Learnings

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import MainCmp from '../../components/MainCmp'
-import BarChart from '../../components/iot/BarChart'
 import rice from '../../media/img/iot/rice.jpg'
 import { Button } from '@mui/material'
+import LineCharts from '../../components/iot/LineCharts'
+import { Link } from 'react-router-dom'
 
 export default function KishanDashbord() {
 
@@ -53,8 +54,9 @@ export default function KishanDashbord() {
     <MainCmp comp={
         <>
           <div className='w-full grid grid-cols-5 gap-2'>
-            <div className='col-span-3 border-[2px] border-slate-400/90 rounded-lg'>
-              <BarChart/>
+            <div className='col-span-3 border-[2px] border-slate-400/90 rounded-lg p-2 '>
+              <div>Products progess</div>
+              <LineCharts/>
             </div>
             <div className='col-span-2 grid grid-cols-1 gap-1'>
               <div className='border-[2px] border-slate-400/90 rounded-lg grid grid-cols-5 p-2'>
@@ -63,16 +65,20 @@ export default function KishanDashbord() {
                   <div className='p1'>Rice</div>
                   <div>Joha (aromatic), Bora (Waxy), Chokuwa (semiwaxy), Red Bao (Deep and Floating)</div>
                   <div className='flex flex-col justify-start items-start '>
-                    {/* <Button>
+                  <Link to="/mart">
+                    <Button>
                     <div className='btn'>
                       Buy Seeds
                     </div>
                     </Button>
+                  </Link>
+                  <Link to='/mart'>
                     <Button>
                     <div className='btn'>
                       Buy Furtilizers
                     </div>
-                    </Button> */}
+                    </Button>
+                  </Link>
                   </div>
                 </div>
                 <div className='col-span-2'>
@@ -99,7 +105,9 @@ export default function KishanDashbord() {
                     </div>
               </div>
             </div>
-
+            {/* <div className='col-span-3 border-[2px] border-slate-400/90 rounded-lg'>
+              <LongChart/>
+            </div> */}
           </div>
         </>
     }/>
